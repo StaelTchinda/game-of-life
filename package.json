@@ -1,0 +1,15 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "description": "A simple implementation of Conway's Game of Life, built using Test-Driven Development. The project focuses on creating and evolving cell grids with various initial patterns and rules.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
