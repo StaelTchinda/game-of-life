@@ -1,11 +1,6 @@
 import { Injectable } from "@angular/core";
+import { GameBoard } from "models/game-board";
 
-export interface GameBoard {
-  width: number;
-  height: number;
-
-  grid: boolean[][];
-}
 
 @Injectable({
   providedIn: "root",
