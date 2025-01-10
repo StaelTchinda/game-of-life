@@ -13,9 +13,9 @@ export class Game implements GameTable {
   height: number;
   private grid: boolean[][];
 
-  constructor(width: number, height: number) {
+  constructor(width: number, height?: number) {
     this.width = width;
-    this.height = height;
+    this.height = height || width;
     this.grid = new Array(height)
       .fill(null)
       .map(() => new Array(width).fill(false));

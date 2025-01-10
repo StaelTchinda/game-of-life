@@ -1,10 +1,20 @@
 import { Game } from "game";
 
-it("should have a width and height", () => {
-  const game = new Game(10, 10);
+it("should initialise game with 2 dimensions", () => {
+  const gameWidth = 10;
+  const gameHeight = 10;
+  const game = new Game(gameWidth, gameHeight);
 
-  expect(game.width).toBe(10);
-  expect(game.height).toBe(10);
+  expect(game.width).toBe(gameWidth);
+  expect(game.height).toBe(gameHeight);
+});
+
+it("shoud initialise game with 1 dimension", () => {
+  const gameLength = 5;
+  const game = new Game(gameLength);
+
+  expect(game.width).toBe(gameLength);
+  expect(game.height).toBe(gameLength);
 });
 
 it("should have dead cells at start", () => {
@@ -37,6 +47,24 @@ it("should be able to set a cell to alive", () => {
 });
 
 describe("game logic", () => {
+  it("dead cell should stay dead if they are all dead", () => {
+    const gameWidth = 2;
+    const gameHeight = 2;
+    const game = new Game(gameWidth, gameHeight);
+
+    expect(game.isCellAlive(0, 0)).toBe(false);
+    expect(game.isCellAlive(0, 1)).toBe(false);
+    expect(game.isCellAlive(1, 0)).toBe(false);
+    expect(game.isCellAlive(1, 1)).toBe(false);
+
+    game.tick();
+
+    expect(game.isCellAlive(0, 0)).toBe(false);
+    expect(game.isCellAlive(0, 1)).toBe(false);
+    expect(game.isCellAlive(1, 0)).toBe(false);
+    expect(game.isCellAlive(1, 1)).toBe(false);
+  });
+
   it("alive cell should die if it has less than 2 neighbors", () => {
     const gameWidth = 2;
     const gameHeight = 2;
