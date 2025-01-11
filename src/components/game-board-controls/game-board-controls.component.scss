@@ -21,6 +21,10 @@
         margin-bottom: 0.1em;
         font-size: 0.9em;
       }
+      .form-label[disabled="true"],
+      input[disabled] {
+        color: #ccc;
+      }
 
       .form-control {
         margin-right: 1em;

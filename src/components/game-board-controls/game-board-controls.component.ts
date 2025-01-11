@@ -9,37 +9,55 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
   styleUrl: "./game-board-controls.component.scss",
 })
 export class GameBoardControlsComponent {
-  _height = new FormControl(10);
-  _width = new FormControl(10);
+  heightFormControl = new FormControl(10);
+  widthFormControl = new FormControl(10);
 
-  @Input() running: boolean = false;
+  private _running: boolean = false;
+  @Input()
+  set running(value: boolean) {
+    console.log("running set to ", value);
+    this._running = value || false;
+    console.log("running is now ", this._running);
+    if (this._running) {
+      this.heightFormControl.disable({ emitEvent: false });
+      this.widthFormControl.disable({ emitEvent: false });
+      console.log("Game is running");
+    } else {
+      this.heightFormControl.enable({ emitEvent: false });
+      this.widthFormControl.enable({ emitEvent: false });
+      console.log("Game is paused");
+    }
+  }
+  get running(): boolean {
+    return this._running;
+  }
   @Output() onRunningChange = new EventEmitter<boolean>();
 
   @Input("width")
   set width(value: number) {
-    this._width.setValue(value);
+    this.widthFormControl.setValue(value);
   }
   get width(): number {
-    return this._width.value as number;
+    return this.widthFormControl.value as number;
   }
   @Output() onWidthChange = new EventEmitter<number>();
 
   @Input("height")
   set height(value: number) {
-    this._height.setValue(value);
+    this.heightFormControl.setValue(value);
   }
   get height(): number {
-    return this._height.value as number;
+    return this.heightFormControl.value as number;
   }
   @Output() onHeightChange = new EventEmitter<number>();
 
   @Output() onRandomise = new EventEmitter<void>();
 
   constructor() {
-    this._width.valueChanges.subscribe((value) => {
+    this.widthFormControl.valueChanges.subscribe((value) => {
       this.onWidthChange.emit(value as number);
     });
-    this._height.valueChanges.subscribe((value) => {
+    this.heightFormControl.valueChanges.subscribe((value) => {
       this.onHeightChange.emit(value as number);
     });
   }

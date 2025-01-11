@@ -35,7 +35,20 @@ describe("GameBoardControlsComponent", () => {
         'button[action="start-pause-game"]'
       );
       expect(button).toBeTruthy();
-      expect(button.textContent).toContain("Start");
+    });
+
+    it("should have a button to randomise the game board", () => {
+      const button = fixture.nativeElement.querySelector(
+        'button[action="randomise-board"]'
+      );
+      expect(button).toBeTruthy();
+    });
+
+    it("should have a button to cancel the game", () => {
+      const button = fixture.nativeElement.querySelector(
+        'button[action="cancel-game"]'
+      );
+      expect(button).toBeTruthy();
     });
 
     it("should have an input field to change the game's width", () => {
@@ -50,6 +63,76 @@ describe("GameBoardControlsComponent", () => {
       expect(input).toBeTruthy();
       expect(input.type).toBe("number");
       expect(input.name).toBe("height");
+    });
+
+    it("should have inputs disabled when the game is running", () => {
+      component.running = true;
+      fixture.detectChanges();
+      const widthInput = fixture.nativeElement.querySelector(
+        'input[name="width"]'
+      );
+      const heightInput = fixture.nativeElement.querySelector(
+        'input[name="height"]'
+      );
+      expect(widthInput.disabled).toEqual(true);
+      expect(heightInput.disabled).toEqual(true);
+    });
+
+    it("should have inputs enabled when the game is not running", () => {
+      component.running = false;
+      fixture.detectChanges();
+      const widthInput = fixture.nativeElement.querySelector(
+        'input[name="width"]'
+      );
+      const heightInput = fixture.nativeElement.querySelector(
+        'input[name="height"]'
+      );
+      expect(widthInput.disabled).toEqual(false);
+      expect(heightInput.disabled).toEqual(false);
+    });
+
+    it("should have buttons cancel and randomise disabled when the game is running", () => {
+      component.running = true;
+      fixture.detectChanges();
+      const cancelButton = fixture.nativeElement.querySelector(
+        'button[action="cancel-game"]'
+      );
+      const randomiseButton = fixture.nativeElement.querySelector(
+        'button[action="randomise-board"]'
+      );
+      expect(cancelButton.disabled).toEqual(true);
+      expect(randomiseButton.disabled).toEqual(true);
+    });
+
+    it("should have buttons cancel and randomise enabled when the game is not running", () => {
+      component.running = false;
+      fixture.detectChanges();
+      const cancelButton = fixture.nativeElement.querySelector(
+        'button[action="cancel-game"]'
+      );
+      const randomiseButton = fixture.nativeElement.querySelector(
+        'button[action="randomise-board"]'
+      );
+      expect(cancelButton.disabled).toEqual(false);
+      expect(randomiseButton.disabled).toEqual(false);
+    });
+
+    it("should have a button to start the game when the game is not running", () => {
+      component.running = false;
+      const button = fixture.nativeElement.querySelector(
+        'button[action="start-pause-game"]'
+      );
+      expect(button).toBeTruthy();
+      expect(button.textContent).toContain("Start");
+    });
+
+    it("should have a button to pause the game when the game is running", () => {
+      component.running = true;
+      const button = fixture.nativeElement.querySelector(
+        'button[action="start-pause-game"]'
+      );
+      expect(button).toBeTruthy();
+      expect(button.textContent).toContain("Pause");
     });
   });
 
