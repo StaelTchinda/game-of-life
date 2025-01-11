@@ -29,9 +29,9 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io). Test results can be seen under [http://localhost:9876/](http://localhost:9876/).
 
-## Running end-to-end tests
+## Deploying
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+This code is configured to be deployed on GitHub Pages. Please ensure you have followed all the steps from [this tutorial](https://www.angularminds.com/blog/host-an-angular-app-in-github-pages). After completing the steps, you can deploy the application by running: `npm run deploy`.
 
 ## Further help
 
