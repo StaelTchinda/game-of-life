@@ -1,0 +1,48 @@
+<main class="main">
+  <h1>Game of Life</h1>
+  <section class="description">
+    <p>
+      The Game of Life, a.k.a. Conway's Game of Life or simply as Life, is a
+      cellular automaton devised by the British mathematician John Horton Conway
+      in 1970. The game is a zero-player game, meaning that its evolution is
+      determined by its initial state, requiring no further input. One interacts
+      with the game by creating an initial configuration and observing how it
+      evolves.
+    </p>
+    <p>
+      Further details can be found on the
+      <a
+        href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
+        target="_blank"
+        rel="noopener"
+        >Wikipedia page</a
+      >.
+    </p>
+    <h2>Rules</h2>
+    <p>At each step in time, the following transitions occur:</p>
+    <ul>
+      <li>
+        Any live cell with fewer than two live neighbours dies, as if by
+        underpopulation.
+      </li>
+      <li>
+        Any live cell with two or three live neighbours lives on to the next
+        generation.
+      </li>
+      <li>
+        Any live cell with more than three live neighbours dies, as if by
+        overpopulation.
+      </li>
+      <li>
+        Any dead cell with exactly three live neighbours becomes a live cell, as
+        if by reproduction.
+      </li>
+    </ul>
+  </section>
+
+  <section class="game-board">
+    <app-game-board></app-game-board>
+  </section>
+</main>
+
+<router-outlet />

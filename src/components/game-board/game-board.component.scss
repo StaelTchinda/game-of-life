@@ -1,0 +1,9 @@
+.board-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+app-game-board-table {
+  flex-grow: 1;
+}

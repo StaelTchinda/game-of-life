@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  .form-section {
+    display: flex;
+    flex-direction: row;
+
+    &:first-child {
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      .form-label {
+        margin-bottom: 0.1em;
+        font-size: 0.9em;
+      }
+      .form-label[disabled="true"],
+      input[disabled] {
+        color: #ccc;
+      }
+
+      .form-control {
+        margin-right: 1em;
+
+        &[type="number"] {
+          width: 4em;
+        }
+      }
+    }
+
+    .btn {
+      margin-left: 1em;
+    }
+  }
+}

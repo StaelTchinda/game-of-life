@@ -1,0 +1,14 @@
+<div class="table-container">
+  <table>
+    <tbody>
+      <tr *ngFor="let row of board.grid; let i = index">
+        <td
+          *ngFor="let cell of row; let j = index"
+          (click)="toggleLiveness(i, j)"
+          [class.alive]="cell"
+          [class.clickable]="!running"
+        ></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
