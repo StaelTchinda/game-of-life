@@ -11,6 +11,7 @@ describe("GameBoardControlsComponent", () => {
   let onRandomiseSpy: jasmine.Spy;
   let onWidthChangeSpy: jasmine.Spy;
   let onHeightChangeSpy: jasmine.Spy;
+  let onSpeedChangeSpy: jasmine.Spy;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,6 +24,7 @@ describe("GameBoardControlsComponent", () => {
     onRandomiseSpy = spyOn(component.onRandomise, "emit");
     onWidthChangeSpy = spyOn(component.onWidthChange, "emit");
     onHeightChangeSpy = spyOn(component.onHeightChange, "emit");
+    onSpeedChangeSpy = spyOn(component.onSpeedChange, "emit");
     onClearSpy = spyOn(component.onClear, "emit");
     fixture.detectChanges();
   });
@@ -67,7 +69,14 @@ describe("GameBoardControlsComponent", () => {
       expect(input.name).toBe("height");
     });
 
-    it("should have inputs disabled when the game is running", () => {
+    it("should have an input field to change the game's speed", () => {
+      const input = fixture.nativeElement.querySelector('input[name="speed"]');
+      expect(input).toBeTruthy();
+      expect(input.type).toBe("range");
+      expect(input.name).toBe("speed");
+    });
+
+    it("should have size inputs disabled when the game is running", () => {
       component.running = true;
       fixture.detectChanges();
       const widthInput = fixture.nativeElement.querySelector(
@@ -80,7 +89,7 @@ describe("GameBoardControlsComponent", () => {
       expect(heightInput.disabled).toEqual(true);
     });
 
-    it("should have inputs enabled when the game is not running", () => {
+    it("should have size inputs enabled when the game is not running", () => {
       component.running = false;
       fixture.detectChanges();
       const widthInput = fixture.nativeElement.querySelector(
@@ -91,6 +100,19 @@ describe("GameBoardControlsComponent", () => {
       );
       expect(widthInput.disabled).toEqual(false);
       expect(heightInput.disabled).toEqual(false);
+    });
+
+    it("should have a speed input field always enabled", () => {
+      component.running = true;
+      fixture.detectChanges();
+      const input = fixture.nativeElement.querySelector('input[name="speed"]');
+
+      expect(input.disabled).toEqual(false);
+
+      component.running = false;
+      fixture.detectChanges();
+
+      expect(input.disabled).toEqual(false);
     });
 
     it("should have buttons clear and randomise disabled when the game is running", () => {
@@ -159,6 +181,11 @@ describe("GameBoardControlsComponent", () => {
       expect(component.height).toBe(20);
     });
 
+    it("should have a speed input", () => {
+      component.speed = 20;
+      expect(component.speed).toBe(20);
+    });
+
     it("should emit an event when the width changes", () => {
       component.onWidthChange.emit(30);
       expect(onWidthChangeSpy).toHaveBeenCalled();
@@ -169,22 +196,33 @@ describe("GameBoardControlsComponent", () => {
       expect(onHeightChangeSpy).toHaveBeenCalled();
     });
 
+    it("should emit an event when the speed changes", () => {
+      component.onSpeedChange.emit(30);
+      expect(onSpeedChangeSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("Logic", () => {
     it("change of width input field should emit an event", () => {
       const input = fixture.nativeElement.querySelector('input[name="width"]');
       input.value = 30;
       input.dispatchEvent(new Event("input"));
-      expect(onWidthChangeSpy).toHaveBeenCalled();
+      expect(onWidthChangeSpy).toHaveBeenCalledWith(30);
     });
 
     it("change of height input field should emit an event", () => {
       const input = fixture.nativeElement.querySelector('input[name="height"]');
       input.value = 30;
       input.dispatchEvent(new Event("input"));
-      expect(onHeightChangeSpy).toHaveBeenCalled();
+      expect(onHeightChangeSpy).toHaveBeenCalledWith(30);
     });
-  });
 
-  describe("Logic", () => {
+    it("change of speed input field should emit an event", () => {
+      const input = fixture.nativeElement.querySelector('input[name="speed"]');
+      input.value = 30;
+      input.dispatchEvent(new Event("input"));
+      expect(onSpeedChangeSpy).toHaveBeenCalledWith(30);
+    });
     it("should start the game when the start/pause button is clicked", () => {
       const button = fixture.nativeElement.querySelector(
         'button[action="start-pause-game"]'

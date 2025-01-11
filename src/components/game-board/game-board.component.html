@@ -1,11 +1,13 @@
 <div class="board-container">
   <app-game-board-controls
+    [speed]="speed"
     [running]="running"
     (onRunningChange)="onRunningChange($event)"
     (onRandomise)="onBoardRandomise()"
     (onClear)="onBoardClear()"
     (onHeightChange)="onBoardHeightChange($event)"
     (onWidthChange)="onBoardWidthChange($event)"
+    (onSpeedChange)="onBoardSpeedChange($event)"
   ></app-game-board-controls>
   <app-game-board-table
     [board]="board"

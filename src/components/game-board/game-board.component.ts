@@ -1,5 +1,8 @@
 import { Component } from "@angular/core";
-import { GameBoardControlsComponent } from "components/game-board-controls/game-board-controls.component";
+import {
+  GameBoardControlsComponent,
+  MAX_SPEED,
+} from "components/game-board-controls/game-board-controls.component";
 import { GameBoardTableComponent } from "components/game-board-table/game-board-table.component";
 import { GameBoard } from "models/game-board";
 import { GameBoardService } from "services/game-board.service";
@@ -16,7 +19,7 @@ export class GameBoardComponent {
   private boardUpdateInterval: ReturnType<typeof setInterval> | undefined =
     undefined;
 
-  speed: number = 1000;
+  speed: number = MAX_SPEED / 2;
   board: GameBoard;
   running: boolean = false;
 
@@ -51,6 +54,15 @@ export class GameBoardComponent {
     );
   }
 
+  onBoardSpeedChange(newSpeed: number) {
+    console.log("Game speed changed", newSpeed);
+    this.speed = newSpeed;
+    if (this.running) {
+      this.stopGame();
+      this.startGame();
+    }
+  }
+
   onBoardCellToggle({ i, j }: { i: number; j: number }) {
     console.log("Game board cell toggled", i, j);
     this.board = this.gameBoardService.toggleCellLiveness(this.board, i, j);
@@ -72,13 +84,14 @@ export class GameBoardComponent {
   }
 
   private startGame() {
-    console.log("Game started");
+    const interval = MAX_SPEED ** 2 / this.speed ** 2;
+    console.log("Game started at interval", interval, "wit speed", this.speed);
     this.boardUpdateInterval = setInterval(() => {
-      console.log("Game tick");
-      const newBoard = this.gameBoardService.tick(this.board);
-      console.log("Game board updated", this.board, newBoard);
-      this.board = newBoard;
-    }, this.speed);
+        console.log("Game tick");
+        const newBoard = this.gameBoardService.tick(this.board);
+        console.log("Game board updated", this.board, newBoard);
+        this.board = newBoard;
+    }, interval);
   }
 
   private stopGame() {
