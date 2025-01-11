@@ -1,9 +1,12 @@
 <table>
-    <tbody>
-        <tr *ngFor="let row of board.grid">
-            <td *ngFor="let cell of row">
-                <app-game-board-table-cell [alive]="cell" [clickable]="running"></app-game-board-table-cell>
-            </td>
-        </tr>
-    </tbody>
+  <tbody>
+    <tr *ngFor="let row of board.grid">
+      <td *ngFor="let cell of row">
+        <app-game-board-table-cell
+          [alive]="cell"
+          [clickable]="!running"
+        ></app-game-board-table-cell>
+      </td>
+    </tr>
+  </tbody>
 </table>

@@ -13,5 +13,5 @@ import { GameBoard } from "models/game-board";
 })
 export class GameBoardTableComponent {
   @Input() board!: GameBoard;
-  @Input() running: boolean = false;
+  @Input() running!: boolean;
 }
