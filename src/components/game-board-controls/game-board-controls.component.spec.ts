@@ -143,6 +143,8 @@ describe("GameBoardControlsComponent", () => {
 
     it("should have a button to start the game when the game is not running", () => {
       component.running = false;
+      fixture.detectChanges();
+
       const button = fixture.nativeElement.querySelector(
         'button[action="start-pause-game"]'
       );
@@ -152,6 +154,7 @@ describe("GameBoardControlsComponent", () => {
 
     it("should have a button to pause the game when the game is running", () => {
       component.running = true;
+      fixture.detectChanges();
       const button = fixture.nativeElement.querySelector(
         'button[action="start-pause-game"]'
       );
