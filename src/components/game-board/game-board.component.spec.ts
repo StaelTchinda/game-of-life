@@ -52,5 +52,19 @@ describe("GameBoardComponent", () => {
       component.onBoardRandomise();
       expect(component.board).not.toEqual(initialBoard);
     });
+
+    it("should update the game board width", () => {
+      const initialBoard = component.board;
+      component.onBoardWidthChange(20);
+      expect(component.board).not.toEqual(initialBoard);
+      expect(component.board.width).toBe(20);
+    });
+
+    it("should update the game board height", () => {
+      const initialBoard = component.board;
+      component.onBoardHeightChange(20);
+      expect(component.board).not.toEqual(initialBoard);
+      expect(component.board.height).toBe(20);
+    });
   });
 });

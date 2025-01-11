@@ -5,8 +5,11 @@ import { GameBoardControlsComponent } from "./game-board-controls.component";
 describe("GameBoardControlsComponent", () => {
   let component: GameBoardControlsComponent;
   let fixture: ComponentFixture<GameBoardControlsComponent>;
+
   let onRunningChangeSpy: jasmine.Spy;
   let onRandomiseSpy: jasmine.Spy;
+  let onWidthChangeSpy: jasmine.Spy;
+  let onHeightChangeSpy: jasmine.Spy;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,6 +20,8 @@ describe("GameBoardControlsComponent", () => {
     component = fixture.componentInstance;
     onRunningChangeSpy = spyOn(component.onRunningChange, "emit");
     onRandomiseSpy = spyOn(component.onRandomise, "emit");
+    onWidthChangeSpy = spyOn(component.onWidthChange, "emit");
+    onHeightChangeSpy = spyOn(component.onHeightChange, "emit");
     fixture.detectChanges();
   });
 
@@ -57,6 +62,40 @@ describe("GameBoardControlsComponent", () => {
     it("should have a method to randomise the game board", () => {
       component.onRandomise.emit();
       expect(onRandomiseSpy).toBeTruthy;
+    });
+
+    it("should have a width input", () => {
+      component.width = 20;
+      expect(component.width).toBe(20);
+    });
+
+    it("should have a height input", () => {
+      component.height = 20;
+      expect(component.height).toBe(20);
+    });
+
+    it("should emit an event when the width changes", () => {
+      component.onWidthChange.emit(30);
+      expect(onWidthChangeSpy).toHaveBeenCalled();
+    });
+
+    it("should emit an event when the height changes", () => {
+      component.onHeightChange.emit(30);
+      expect(onHeightChangeSpy).toHaveBeenCalled();
+    });
+
+    it("change of width input field should emit an event", () => {
+      const input = fixture.nativeElement.querySelector('input[name="width"]');
+      input.value = 30;
+      input.dispatchEvent(new Event("input"));
+      expect(onWidthChangeSpy).toHaveBeenCalled();
+    });
+
+    it("change of height input field should emit an event", () => {
+      const input = fixture.nativeElement.querySelector('input[name="height"]');
+      input.value = 30;
+      input.dispatchEvent(new Event("input"));
+      expect(onHeightChangeSpy).toHaveBeenCalled();
     });
   });
 });

@@ -42,6 +42,20 @@ export class GameBoardComponent {
       this.board.height
     );
   }
+  onBoardWidthChange(newWidth: number) {
+    console.log("Game board width changed", newWidth);
+    this.onBoardSizeChange(newWidth, this.board.height);
+  }
+
+  onBoardHeightChange(newHeight: number) {
+    console.log("Game board height changed", newHeight);
+    this.onBoardSizeChange(this.board.width, newHeight);
+  }
+
+  private onBoardSizeChange(newWidth: number, newHeight: number) {
+    console.log("Game board size changed", newWidth, newHeight);
+    this.board = this.gameBoardService.createBoard(newWidth, newHeight);
+  }
 
   private startGame() {
     console.log("Game started");
