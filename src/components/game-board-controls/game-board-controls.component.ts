@@ -9,11 +9,10 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
   styleUrl: "./game-board-controls.component.scss",
 })
 export class GameBoardControlsComponent {
-  height = new FormControl(1);
-  width = new FormControl(1);
-
   @Input() running: boolean = false;
   @Output() onRunningChange = new EventEmitter<boolean>();
+  height = new FormControl(10);
+  width = new FormControl(10);
 
   onStartPauseClick() {
     console.log("start/pause button clicked");
