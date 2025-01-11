@@ -67,6 +67,28 @@ describe("BoardBoardService", () => {
   });
 
   describe("board logic", () => {
+    it("should return board of same shape after ticking", () => {
+      const boardWidth = 2;
+      const boardHeight = 2;
+      let board = service.createBoard(boardWidth, boardHeight);
+
+      const newBoard = service.tick(board);
+
+      expect(newBoard.width).toBe(boardWidth);
+      expect(newBoard.height).toBe(boardHeight);
+    });
+
+    it("should return grid of same shape after ticking", () => {
+      const boardWidth = 2;
+      const boardHeight = 2;
+      let board = service.createBoard(boardWidth, boardHeight);
+
+      const newBoard = service.tick(board);
+
+      expect(newBoard.grid.length).toBe(board.grid.length);
+      expect(newBoard.grid[0].length).toBe(board.grid[0].length);
+    });
+
     it("dead cell should stay dead if they are all dead", () => {
       const boardWidth = 2;
       const boardHeight = 2;
