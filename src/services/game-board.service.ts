@@ -28,7 +28,15 @@ export class GameBoardService {
   }
 
   isCellAlive(board: GameBoard, x: number, y: number): boolean {
-    return board.grid[x][y];
+    try {
+      return board.grid[x][y];
+    } catch (e) {
+      console.error(
+        `Error accessing cell at (${x}, ${y}) of board of shape (${board.width}, ${board.height}) and grid of shape (${board.grid.length}, ${board.grid[0].length})`,
+        e
+      );
+      throw e;
+    }
   }
 
   toggleCellLiveness(board: GameBoard, x: number, y: number): GameBoard {
