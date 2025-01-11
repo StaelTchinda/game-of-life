@@ -52,6 +52,7 @@ export class GameBoardControlsComponent {
   @Output() onHeightChange = new EventEmitter<number>();
 
   @Output() onRandomise = new EventEmitter<void>();
+  @Output() onClear = new EventEmitter<void>();
 
   constructor() {
     this.widthFormControl.valueChanges.subscribe((value) => {
@@ -69,5 +70,9 @@ export class GameBoardControlsComponent {
   onRandomiseClick() {
     console.log("randomise button clicked");
     this.onRandomise.emit();
+  }
+  onClearClick() {
+    console.log("clear button clicked");
+    this.onClear.emit();
   }
 }

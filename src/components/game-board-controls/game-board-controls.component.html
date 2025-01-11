@@ -30,7 +30,13 @@
     </div>
   </div>
   <div class="form-section">
-    <button type="button" class="btn" action="clear-board" [disabled]="running">
+    <button
+      type="button"
+      class="btn"
+      action="clear-board"
+      (click)="onClearClick()"
+      [disabled]="running"
+    >
       Clear
     </button>
     <button

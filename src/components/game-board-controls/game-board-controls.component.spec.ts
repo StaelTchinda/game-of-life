@@ -23,6 +23,7 @@ describe("GameBoardControlsComponent", () => {
     onRandomiseSpy = spyOn(component.onRandomise, "emit");
     onWidthChangeSpy = spyOn(component.onWidthChange, "emit");
     onHeightChangeSpy = spyOn(component.onHeightChange, "emit");
+    onClearSpy = spyOn(component.onClear, "emit");
     fixture.detectChanges();
   });
 

@@ -43,6 +43,14 @@ export class GameBoardComponent {
     );
   }
 
+  onBoardClear() {
+    console.log("Game board cleared");
+    this.board = this.gameBoardService.createBoard(
+      this.board.width,
+      this.board.height
+    );
+  }
+
   onBoardCellToggle({ i, j }: { i: number; j: number }) {
     console.log("Game board cell toggled", i, j);
     this.board = this.gameBoardService.toggleCellLiveness(this.board, i, j);
