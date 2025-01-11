@@ -1,3 +1,4 @@
+<div class="board-container">
   <app-game-board-controls
     [running]="running"
     (onRunningChange)="onRunningChange($event)"
@@ -5,3 +6,9 @@
     (onHeightChange)="onBoardHeightChange($event)"
     (onWidthChange)="onBoardWidthChange($event)"
   ></app-game-board-controls>
+  <app-game-board-table
+    [board]="board"
+    [running]="running"
+    (onBoardCellToggle)="onBoardCellToggle($event)"
+  ></app-game-board-table>
+</div>

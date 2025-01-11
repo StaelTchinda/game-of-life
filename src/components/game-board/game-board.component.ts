@@ -42,6 +42,12 @@ export class GameBoardComponent {
       this.board.height
     );
   }
+
+  onBoardCellToggle({ i, j }: { i: number; j: number }) {
+    console.log("Game board cell toggled", i, j);
+    this.board = this.gameBoardService.toggleCellLiveness(this.board, i, j);
+  }
+
   onBoardWidthChange(newWidth: number) {
     console.log("Game board width changed", newWidth);
     this.onBoardSizeChange(newWidth, this.board.height);

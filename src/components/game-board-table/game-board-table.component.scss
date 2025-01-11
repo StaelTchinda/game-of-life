@@ -1,6 +1,34 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
 table {
   width: 100%;
+  flex-grow: 2;
 }
 td {
-  position: relative;
+  border: 1px solid #d0d0d0;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s;
+
+  &.alive {
+    background-color: #607d8b;
+  }
+
+  &:not(.clickable) {
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    &:not(.alive) {
+      background-color: #cfd8dc;
+    }
+    border-color: #607d8b;
+  }
 }
