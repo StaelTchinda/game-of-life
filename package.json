@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "prod": "ng build --configuration production --base-href=/game-of-life/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "generate": "ng generate"
