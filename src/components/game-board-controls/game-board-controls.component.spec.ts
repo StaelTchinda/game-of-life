@@ -6,6 +6,7 @@ describe("GameBoardControlsComponent", () => {
   let component: GameBoardControlsComponent;
   let fixture: ComponentFixture<GameBoardControlsComponent>;
   let onRunningChangeSpy: jasmine.Spy;
+  let onRandomiseSpy: jasmine.Spy;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,6 +16,7 @@ describe("GameBoardControlsComponent", () => {
     fixture = TestBed.createComponent(GameBoardControlsComponent);
     component = fixture.componentInstance;
     onRunningChangeSpy = spyOn(component.onRunningChange, "emit");
+    onRandomiseSpy = spyOn(component.onRandomise, "emit");
     fixture.detectChanges();
   });
 
@@ -50,6 +52,11 @@ describe("GameBoardControlsComponent", () => {
     it("should have a method to start/pause the game", () => {
       component.onRunningChange.emit(true);
       expect(onRunningChangeSpy).toHaveBeenCalled();
+    });
+
+    it("should have a method to randomise the game board", () => {
+      component.onRandomise.emit();
+      expect(onRandomiseSpy).toBeTruthy;
     });
   });
 });
