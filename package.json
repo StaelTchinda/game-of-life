@@ -2,13 +2,13 @@
   "name": "game-of-life",
   "version": "0.0.0",
   "description": "A simple implementation of Conway's Game of Life, built using Test-Driven Development. The project focuses on creating and evolving cell grids with various initial patterns and rules.",
-
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate": "ng generate"
   },
   "private": true,
   "dependencies": {
