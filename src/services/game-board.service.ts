@@ -54,9 +54,9 @@ export class GameBoardService {
 
         if (
           xIndex >= 0 &&
-          xIndex < board.width &&
+          xIndex < board.grid.length &&
           yIndex >= 0 &&
-          yIndex < board.height
+          yIndex < board.grid[0].length
         ) {
           if (this.isCellAlive(board, xIndex, yIndex) === livenessState) {
             count++;
@@ -72,9 +72,7 @@ export class GameBoardService {
   }
 
   tick(board: GameBoard): GameBoard {
-    const newGrid = Array.from({ length: board.width }, () =>
-      Array.from({ length: board.height }, () => false)
-    );
+    const newGrid = this.createBoard(board.width, board.height).grid;
 
     for (let i = 0; i < board.grid.length; i++) {
       for (let j = 0; j < board.grid[i].length; j++) {
@@ -97,9 +95,7 @@ export class GameBoardService {
   }
 
   tickWithTracks(board: GameBoard): [GameBoard, [number, number][]] {
-    const newGrid = Array.from({ length: board.width }, () =>
-      Array.from({ length: board.height }, () => false)
-    );
+    const newGrid = this.createBoard(board.width, board.height).grid;
     const tracks: [number, number][] = [];
 
     for (let i = 0; i < board.grid.length; i++) {
