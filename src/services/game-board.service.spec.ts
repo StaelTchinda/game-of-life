@@ -14,10 +14,21 @@ describe("BoardBoardService", () => {
     expect(service).toBeTruthy();
   });
 
-  it("should initialise board board", () => {
+  it("should initialise board", () => {
     const boardWidth = 2;
     const boardHeight = 2;
     const board = service.createBoard(boardWidth, boardHeight);
+
+    expect(board.width).toBe(boardWidth);
+    expect(board.height).toBe(boardHeight);
+    expect(board.grid.length).toBe(boardWidth);
+    expect(board.grid[0].length).toBe(boardHeight);
+  });
+
+  it("should initialise random board", () => {
+    const boardWidth = 2;
+    const boardHeight = 2;
+    const board = service.createRandomBoard(boardWidth, boardHeight);
 
     expect(board.width).toBe(boardWidth);
     expect(board.height).toBe(boardHeight);
@@ -153,6 +164,5 @@ describe("BoardBoardService", () => {
 
       expect(service.isCellAlive(board, cellX, cellY)).toBe(true);
     });
-
   });
 });

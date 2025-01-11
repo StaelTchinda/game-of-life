@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { GameBoard } from "models/game-board";
 
-
 @Injectable({
   providedIn: "root",
 })
@@ -12,7 +11,19 @@ export class GameBoardService {
     return {
       width,
       height,
-      grid: Array.from({ length: width }, () => Array.from({ length: height }, () => false)),
+      grid: Array.from({ length: width }, () =>
+        Array.from({ length: height }, () => false)
+      ),
+    } as GameBoard;
+  }
+
+  createRandomBoard(width: number, height: number): GameBoard {
+    return {
+      width,
+      height,
+      grid: Array.from({ length: width }, () =>
+        Array.from({ length: height }, () => Math.random() > 0.5)
+      ),
     } as GameBoard;
   }
 
@@ -25,7 +36,12 @@ export class GameBoardService {
     return board;
   }
 
-  private countNeighbors(board: GameBoard, x: number, y: number, livenessState: boolean): number {
+  private countNeighbors(
+    board: GameBoard,
+    x: number,
+    y: number,
+    livenessState: boolean
+  ): number {
     let count = 0;
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
@@ -36,7 +52,12 @@ export class GameBoardService {
         const xIndex = x + i;
         const yIndex = y + j;
 
-        if (xIndex >= 0 && xIndex < board.width && yIndex >= 0 && yIndex < board.height) {
+        if (
+          xIndex >= 0 &&
+          xIndex < board.width &&
+          yIndex >= 0 &&
+          yIndex < board.height
+        ) {
           if (this.isCellAlive(board, xIndex, yIndex) === livenessState) {
             count++;
           }
@@ -51,7 +72,9 @@ export class GameBoardService {
   }
 
   tick(board: GameBoard): GameBoard {
-    const newGrid = Array.from({ length: board.width }, () => Array.from({ length: board.height }, () => false));
+    const newGrid = Array.from({ length: board.width }, () =>
+      Array.from({ length: board.height }, () => false)
+    );
 
     for (let i = 0; i < board.grid.length; i++) {
       for (let j = 0; j < board.grid[i].length; j++) {
@@ -69,7 +92,6 @@ export class GameBoardService {
           newGrid[i][j] = board.grid[i][j];
         }
       }
-      
     }
     return { ...board, grid: newGrid };
   }
