@@ -1,5 +1,5 @@
 .main {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -36,6 +36,10 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.description {
+  margin-bottom: 1em;
 }
 
 /* Game board styles */
