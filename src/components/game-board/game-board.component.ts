@@ -87,10 +87,24 @@ export class GameBoardComponent {
     const interval = MAX_SPEED ** 2 / this.speed ** 2;
     console.log("Game started at interval", interval, "wit speed", this.speed);
     this.boardUpdateInterval = setInterval(() => {
+      try {
         console.log("Game tick");
-        const newBoard = this.gameBoardService.tick(this.board);
+        const [newBoard, changedCoords] = this.gameBoardService.tickWithTracks(
+          this.board
+        );
         console.log("Game board updated", this.board, newBoard);
         this.board = newBoard;
+        if (changedCoords.length === 0) {
+          this.running = false;
+          console.log("Game stopped due to no changes");
+          this.stopGame();
+        }
+      } catch (error) {
+        console.error("Error in game tick", error);
+        this.running = false;
+        alert("Error has occurred, game stopped.");
+        this.stopGame();
+      }
     }, interval);
   }
 

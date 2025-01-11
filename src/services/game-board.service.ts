@@ -95,4 +95,34 @@ export class GameBoardService {
     }
     return { ...board, grid: newGrid };
   }
+
+  tickWithTracks(board: GameBoard): [GameBoard, [number, number][]] {
+    const newGrid = Array.from({ length: board.width }, () =>
+      Array.from({ length: board.height }, () => false)
+    );
+    const tracks: [number, number][] = [];
+
+    for (let i = 0; i < board.grid.length; i++) {
+      for (let j = 0; j < board.grid[i].length; j++) {
+        const aliveNeighbors = this.countAliveNeighbors(board, i, j);
+
+        if (this.isCellAlive(board, i, j) && aliveNeighbors < 2) {
+          newGrid[i][j] = false;
+        } else if (this.isCellAlive(board, i, j) && aliveNeighbors in [2, 3]) {
+          newGrid[i][j] = true;
+        } else if (this.isCellAlive(board, i, j) && aliveNeighbors > 3) {
+          newGrid[i][j] = false;
+        } else if (!this.isCellAlive(board, i, j) && aliveNeighbors === 3) {
+          newGrid[i][j] = true;
+        } else {
+          newGrid[i][j] = board.grid[i][j];
+        }
+
+        if (newGrid[i][j] !== board.grid[i][j]) {
+          tracks.push([i, j]);
+        }
+      }
+    }
+    return [{ ...board, grid: newGrid }, tracks];
+  }
 }
