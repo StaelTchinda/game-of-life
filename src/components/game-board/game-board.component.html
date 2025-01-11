@@ -1,6 +1,7 @@
 <app-game-board-controls
   [running]="running"
   (onRunningChange)="onRunningChange($event)"
+  (onRandomise)="onBoardRandomise()"
 ></app-game-board-controls>
 <app-game-board-table
   [board]="board"

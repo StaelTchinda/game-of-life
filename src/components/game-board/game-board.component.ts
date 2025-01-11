@@ -13,12 +13,15 @@ import { GameBoardService } from "services/game-board.service";
   styleUrl: "./game-board.component.scss",
 })
 export class GameBoardComponent {
+  private boardUpdateInterval: ReturnType<typeof setInterval> | undefined =
+    undefined;
+
+  speed: number = 1000;
   board: GameBoard;
   running: boolean = false;
 
   constructor(private gameBoardService: GameBoardService) {
     this.board = gameBoardService.createBoard(10, 10);
-    this.running = true;
     console.log("Game board created", this.board);
   }
 
@@ -30,6 +33,14 @@ export class GameBoardComponent {
       this.stopGame();
     }
     this.running = newRunning;
+  }
+
+  onBoardRandomise() {
+    console.log("Game board randomised");
+    this.board = this.gameBoardService.createRandomBoard(
+      this.board.width,
+      this.board.height
+    );
   }
 
   private startGame() {

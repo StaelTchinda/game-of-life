@@ -11,11 +11,17 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
 export class GameBoardControlsComponent {
   @Input() running: boolean = false;
   @Output() onRunningChange = new EventEmitter<boolean>();
+  @Output() onRandomise = new EventEmitter<void>();
+
   height = new FormControl(10);
   width = new FormControl(10);
 
   onStartPauseClick() {
     console.log("start/pause button clicked");
     this.onRunningChange.emit(!this.running);
+  }
+  onRandomiseClick() {
+    console.log("randomise button clicked");
+    this.onRandomise.emit();
   }
 }
