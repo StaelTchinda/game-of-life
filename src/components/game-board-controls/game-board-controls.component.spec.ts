@@ -7,6 +7,7 @@ describe("GameBoardControlsComponent", () => {
   let fixture: ComponentFixture<GameBoardControlsComponent>;
 
   let onRunningChangeSpy: jasmine.Spy;
+  let onClearSpy: jasmine.Spy;
   let onRandomiseSpy: jasmine.Spy;
   let onWidthChangeSpy: jasmine.Spy;
   let onHeightChangeSpy: jasmine.Spy;
@@ -44,9 +45,9 @@ describe("GameBoardControlsComponent", () => {
       expect(button).toBeTruthy();
     });
 
-    it("should have a button to cancel the game", () => {
+    it("should have a button to clear the game", () => {
       const button = fixture.nativeElement.querySelector(
-        'button[action="cancel-game"]'
+        'button[action="clear-board"]'
       );
       expect(button).toBeTruthy();
     });
@@ -91,29 +92,29 @@ describe("GameBoardControlsComponent", () => {
       expect(heightInput.disabled).toEqual(false);
     });
 
-    it("should have buttons cancel and randomise disabled when the game is running", () => {
+    it("should have buttons clear and randomise disabled when the game is running", () => {
       component.running = true;
       fixture.detectChanges();
-      const cancelButton = fixture.nativeElement.querySelector(
-        'button[action="cancel-game"]'
+      const clearButton = fixture.nativeElement.querySelector(
+        'button[action="clear-board"]'
       );
       const randomiseButton = fixture.nativeElement.querySelector(
         'button[action="randomise-board"]'
       );
-      expect(cancelButton.disabled).toEqual(true);
+      expect(clearButton.disabled).toEqual(true);
       expect(randomiseButton.disabled).toEqual(true);
     });
 
-    it("should have buttons cancel and randomise enabled when the game is not running", () => {
+    it("should have buttons clear and randomise enabled when the game is not running", () => {
       component.running = false;
       fixture.detectChanges();
-      const cancelButton = fixture.nativeElement.querySelector(
-        'button[action="cancel-game"]'
+      const clearButton = fixture.nativeElement.querySelector(
+        'button[action="clear-board"]'
       );
       const randomiseButton = fixture.nativeElement.querySelector(
         'button[action="randomise-board"]'
       );
-      expect(cancelButton.disabled).toEqual(false);
+      expect(clearButton.disabled).toEqual(false);
       expect(randomiseButton.disabled).toEqual(false);
     });
 
@@ -179,6 +180,32 @@ describe("GameBoardControlsComponent", () => {
       input.value = 30;
       input.dispatchEvent(new Event("input"));
       expect(onHeightChangeSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe("Logic", () => {
+    it("should start the game when the start/pause button is clicked", () => {
+      const button = fixture.nativeElement.querySelector(
+        'button[action="start-pause-game"]'
+      );
+      button.click();
+      expect(onRunningChangeSpy).toHaveBeenCalled();
+    });
+
+    it("should randomise the game board when the randomise button is clicked", () => {
+      const button = fixture.nativeElement.querySelector(
+        'button[action="randomise-board"]'
+      );
+      button.click();
+      expect(onRandomiseSpy).toHaveBeenCalled();
+    });
+
+    it("should clear the game when the clear button is clicked", () => {
+      const button = fixture.nativeElement.querySelector(
+        'button[action="clear-board"]'
+      );
+      button.click();
+      expect(onClearSpy).toHaveBeenCalled();
     });
   });
 });
