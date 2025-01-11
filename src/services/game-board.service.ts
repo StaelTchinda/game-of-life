@@ -11,8 +11,8 @@ export class GameBoardService {
     return {
       width,
       height,
-      grid: Array.from({ length: width }, () =>
-        Array.from({ length: height }, () => false)
+      grid: Array.from({ length: height }, () =>
+        Array.from({ length: width }, () => false)
       ),
     } as GameBoard;
   }
@@ -21,8 +21,8 @@ export class GameBoardService {
     return {
       width,
       height,
-      grid: Array.from({ length: width }, () =>
-        Array.from({ length: height }, () => Math.random() > 0.5)
+      grid: Array.from({ length: height }, () =>
+        Array.from({ length: width }, () => Math.random() > 0.5)
       ),
     } as GameBoard;
   }
