@@ -8,7 +8,7 @@
     "build": "ng build",
     "deploy": "ng deploy --base-href=/game-of-life/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --browsers=ChromeHeadless --progress=false --watch=false --code-coverage --source-map=false",
     "generate": "ng generate"
   },
   "private": true,
